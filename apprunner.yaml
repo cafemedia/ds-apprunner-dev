@@ -1,0 +1,6 @@
+version: 1.0
+runtime: python3.8
+entrypoint: streamlit run app.py
+build:
+  commands:
+    - pip install -r requirements.txt
