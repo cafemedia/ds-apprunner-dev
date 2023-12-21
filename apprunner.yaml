@@ -1,6 +1,10 @@
 version: 1.0
-runtime: python3.8
-entrypoint: streamlit run app.py
+runtime: python3 
 build:
   commands:
-    - pip install -r requirements.txt
+    build:
+      - pip install -r requirements.txt
+      - pip install pipenv
+      - pipenv install 
+run: 
+  command: python app.py
