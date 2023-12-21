@@ -5,4 +5,5 @@ build:
     build:
       - pip install -r requirements.txt
 run: 
-  command: python app.py
+  command: streamlit run app.py
+  port: 8501
