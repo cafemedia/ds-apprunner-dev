@@ -3,6 +3,8 @@ runtime: python3
 build:
   commands:
     build:
-      - pip install -r requirements.txt
+      - pip install pipenv
+      - pipenv install
+      - pipenv install streamlit
 run: 
-  command: echo "I am here"
+  command: pipenv run python app.py
