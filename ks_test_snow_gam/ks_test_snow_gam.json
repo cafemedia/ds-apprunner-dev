@@ -1,6 +1,6 @@
 {
   "name" : "ks_test_snow_gam",
-  "jobMode" : "VISUAL",
+  "jobMode" : "SCRIPT",
   "description" : "Testing for ctmap alteration of snowflake-athena sync of gamlog (KS)",
   "role" : "arn:aws:iam::760489876826:role/Glue_DefaultRole",
   "executionProperty" : {

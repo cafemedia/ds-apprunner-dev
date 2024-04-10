@@ -6,12 +6,8 @@ from pyspark.sql import SparkSession
 from awsglue.context import GlueContext
 from awsglue.utils import getResolvedOptions
 
-0/0
-
 version = ('orig','str')[0]
-filedatetime = 'date=2024-04-08/hour=20/'
-
-data_date, data_hour, JOB_RUN_ID = ('','','')
+filedatetime = 'date=2024-04-08/hour=23/'
 
 ###################################################
 # Gamlog stage path. Where snowflake unloads data
@@ -255,22 +251,30 @@ SPARK_TRANSFORM_QUERY_CTMAP_STR = """
   FROM 
     gamlog_unloaded
 """
+logger.info('Spark ready; beginning read')
 
 try:
     # Create spark df from gamlog stage data
     gamlog = spark.read.parquet(GAMLOG_STAGE_PATH)
+
+    logger.info('Read completed; beginning view creation')
     
     # Set up spark view
     gamlog.createOrReplaceTempView('gamlog_unloaded')
-    
+
+    logger.info('View completed; beginning transform')
+
     # Execute Transform
     if version == 'orig' : transformed_gamlog = spark.sql(SPARK_TRANSFORM_QUERY_ORIG)
     elif version == 'str' : transformed_gamlog = spark.sql(SPARK_TRANSFORM_QUERY_CTMAP_STR)
     else : raise ValueError('invalid version specified')
+
+    logger.info('Transform complete; beginning write')    
     
     # Save to final location
     transformed_gamlog.write.mode("overwrite").parquet(ATHENA_UNLOAD_PATH)
 
+    logger.info('Write completed; job done')
 except:
     logger.error(traceback.format_exc())
 
