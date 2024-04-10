@@ -1,7 +1,7 @@
 {
   "name" : "ks_test_snow_gam",
-  "jobMode" : "SCRIPT",
-  "description" : "",
+  "jobMode" : "VISUAL",
+  "description" : "Testing for ctmap alteration of snowflake-athena sync of gamlog (KS)",
   "role" : "arn:aws:iam::760489876826:role/Glue_DefaultRole",
   "executionProperty" : {
     "maxConcurrentRuns" : 10
@@ -12,22 +12,22 @@
     "pythonVersion" : "3"
   },
   "defaultArguments" : {
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--TempDir" : "s3://aws-glue-assets-760489876826-us-east-1/temporary/",
+    "--extra-jars" : "s3://gamdtf-18190176/lib/spark_job_jars/snowflake-jdbc-3.13.12.jar,s3://gamdtf-18190176/lib/spark_job_jars/spark-snowflake_2.12-2.9.2-spark_3.1.jar",
     "--enable-metrics" : "true",
     "--enable-spark-ui" : "true",
     "--user-jars-first" : "true",
     "--spark-event-logs-path" : "s3://aws-glue-assets-760489876826-us-east-1/sparkHistoryLogs/",
     "--enable-job-insights" : "true",
     "--enable-observability-metrics" : "true",
-    "--enable-glue-datacatalog" : "true",
     "--enable-continuous-cloudwatch-log" : "true",
-    "--job-bookmark-option" : "job-bookmark-disable",
     "--job-language" : "python",
-    "--TempDir" : "s3://aws-glue-assets-760489876826-us-east-1/temporary/",
-    "--enable-auto-scaling" : "true",
-    "--extra-jars" : "s3://gamdtf-18190176/lib/spark_job_jars/snowflake-jdbc-3.13.12.jar,s3://gamdtf-18190176/lib/spark_job_jars/spark-snowflake_2.12-2.9.2-spark_3.1.jar"
+    "--enable-auto-scaling" : "true"
   },
   "maxRetries" : 0,
-  "allocatedCapacity" : 10,
+  "allocatedCapacity" : 20,
   "timeout" : 2880,
   "maxCapacity" : 20.0,
   "glueVersion" : "3.0",
