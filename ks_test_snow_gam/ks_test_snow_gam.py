@@ -7,7 +7,7 @@ from awsglue.context import GlueContext
 from awsglue.utils import getResolvedOptions
 
 version = ('orig','str')[0]
-filedatetime = 'date=2024-04-08/hour=23/'
+filedatetime = 'date=2024-04-08/hour=20/'
 
 ###################################################
 # Gamlog stage path. Where snowflake unloads data
@@ -262,7 +262,7 @@ try:
     # Set up spark view
     gamlog.createOrReplaceTempView('gamlog_unloaded')
 
-    logger.info('View completed; beginning transform')
+    logger.info(f'View completed; beginning transform of {version} version')
 
     # Execute Transform
     if version == 'orig' : transformed_gamlog = spark.sql(SPARK_TRANSFORM_QUERY_ORIG)
